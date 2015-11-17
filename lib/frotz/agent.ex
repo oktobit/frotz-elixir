@@ -2,13 +2,12 @@ defmodule FrotzAgent do
   alias Porcelain.Process, as: Proc
   alias Porcelain.Result
 
-
   def start_link(options) do
     Agent.start_link (fn -> init(options) end)
   end
 
   defp init(options) do
-    proc = %Proc{pid: pid} = Porcelain.spawn("bash", ["--noediting", "-i"], in: :receive, out: {:send, self()})
+    proc = %Proc{pid: pid} = Porcelain.spawn("sh", ["--noediting", "-i"], in: :receive, out: {:send, self()})
     Map.merge options, %{proc: proc}
   end
 
