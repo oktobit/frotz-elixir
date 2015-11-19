@@ -3,8 +3,8 @@ defmodule FrotzAgentTest do
 
   setup do
     options = %{
-      frotz_path: " ~/frotz/dfrotz",
-      game_path: "~/frotz/ZORK1.DAT"
+      frotz_path: Application.get_env(:frotz, :frotz_path),
+      game_path: Application.get_env(:frotz, :game_path)
     }
 
     {:ok, agent} = FrotzAgent.start_link(options)
